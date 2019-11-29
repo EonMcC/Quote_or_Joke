@@ -55,6 +55,14 @@ mounted(){
   eventBus.$on('selected-fave-joke', (faveJoke) => {
     this.faveJokes.push(faveJoke);
   })
+  eventBus.$on('reloadQuote', () => {
+    fetch('https://quote-garden.herokuapp.com/quotes/random')
+    .then(res => res.json())
+    .then(quote => {
+      this.quotes.push(quote);
+      this.currentQuote = quote;
+    })
+  })
 },
 components: {
   "quote-box": QuoteBox,
