@@ -2,13 +2,20 @@
   <div v-if="joke">
     <p>{{this.joke.setup}}</p>
     <p>{{this.joke.punchline}}</p>
+    <button type="button" v-on:click="handleClickFave">Save as a Fave</button>
   </div>
 </template>
 
 <script>
+import {eventBus} from '../main.js';
 export default {
   name: "joke-item",
-  props: ['joke']
+  props: ['joke'],
+  methods: {
+    handleClickFave(){
+      eventBus.$emit('selected-fave-joke', this.joke);
+    }
+  }
 }
 </script>
 
