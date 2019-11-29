@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <quote-item :quote="quoteBox"></quote-item>
-    <button type="button" v-on:click="handleClickQuoteReload"></button>
+    <button type="button" v-on:click="handleClickQuoteReload">New Quote Please!</button>
   </div>
 </template>
 

@@ -63,6 +63,14 @@ mounted(){
       this.currentQuote = quote;
     })
   })
+  eventBus.$on('reloadJoke', () => {
+    fetch('https://official-joke-api.appspot.com/random_joke')
+    .then(res => res.json())
+    .then(joke => {
+      this.jokes.push(joke);
+      this.currentJoke = joke;
+    })
+  })
 },
 components: {
   "quote-box": QuoteBox,
