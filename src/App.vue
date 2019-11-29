@@ -1,12 +1,13 @@
 <template>
   <div id="app">
     <h1>Quote or Joke?</h1>
-    <quote-box :quoteBox="quotes"></quote-box>
+    <quote-box :quoteBox="currentQuote"></quote-box>
 
   </div>
 </template>
 
 <script>
+import {eventBus} from './main.js';
 import QuoteBox from './components/QuoteBox.vue';
 import QuoteItem from './components/QuoteItem.vue';
 
@@ -22,7 +23,10 @@ export default {
 mounted(){
   fetch('https://quote-garden.herokuapp.com/quotes/random')
   .then(res => res.json())
-  .then(quote => this.quotes.push(quote))
+  .then(quote => {
+    this.quotes.push(quote);
+    this.currentQuote = quote;
+  })
 
   fetch('https://official-joke-api.appspot.com/random_joke')
   .then(res => res.json())
