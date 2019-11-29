@@ -15,6 +15,8 @@ import QuoteItem from './components/QuoteItem.vue';
 import FaveQuoteBox from './components/FaveQuoteBox.vue';
 import FaveQuoteDetail from './components/FaveQuoteDetail.vue';
 import JokeBox from './components/JokeBox.vue';
+import JokeItem from './components/JokeItem.vue';
+
 
 
 export default {
@@ -25,7 +27,8 @@ export default {
       jokes:[],
       currentQuote: null,
       faveQuotes: [],
-      currentJoke: null
+      currentJoke: null,
+      faveJokes: []
     };
 },
 mounted(){
@@ -43,9 +46,12 @@ mounted(){
     this.currentJoke = joke;
   })
 
-  eventBus.$on('selected-fave-quote'), (faveQuote) => {
+  eventBus.$on('selected-fave-quote', (faveQuote) => {
     this.faveQuotes.push(faveQuote);
-  }
+  })
+  eventBus.$on('selected-fave-joke', (faveJoke) => {
+    this.faveJokes.push(faveJoke);
+  })
 },
 components: {
   "quote-box": QuoteBox,
