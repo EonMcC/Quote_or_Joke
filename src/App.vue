@@ -1,18 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Quote or Joke?</h1>
+    <quote-box :quoteBox="quotes"></quote-box>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import QuoteBox from './components/QuoteBox.vue';
+import QuoteItem from './components/QuoteItem.vue';
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
-  }
+  data(){
+    return {
+      quotes: [],
+      jokes:[],
+      currentQuote: null
+    };
+},
+mounted(){
+  fetch('https://quote-garden.herokuapp.com/quotes/random')
+  .then(res => res.json())
+  .then(quote => this.quotes.push(quote))
+
+  fetch('https://official-joke-api.appspot.com/random_joke')
+  .then(res => res.json())
+  .then(joke => this.jokes.push(joke))
+},
+components: {
+  "quote-box": QuoteBox,
+  "quote-item": QuoteItem
+}
 }
 </script>
 
