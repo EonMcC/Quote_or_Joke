@@ -2,7 +2,7 @@
   <div id="app">
     <h1>Quote or Joke?</h1>
     <quote-box :quoteBox="currentQuote"></quote-box>
-
+    <fave-quote-box :faveQuotes="faveQuotes"></fave-quote-box>
   </div>
 </template>
 
@@ -10,6 +10,9 @@
 import {eventBus} from './main.js';
 import QuoteBox from './components/QuoteBox.vue';
 import QuoteItem from './components/QuoteItem.vue';
+import FaveQuoteBox from './components/FaveQuoteBox.vue';
+import FaveQuoteDetail from './components/FaveQuoteDetail.vue';
+
 
 export default {
   name: 'app',
@@ -17,7 +20,8 @@ export default {
     return {
       quotes: [],
       jokes:[],
-      currentQuote: null
+      currentQuote: null,
+      faveQuotes: []
     };
 },
 mounted(){
@@ -31,10 +35,16 @@ mounted(){
   fetch('https://official-joke-api.appspot.com/random_joke')
   .then(res => res.json())
   .then(joke => this.jokes.push(joke))
+
+  eventBus.$on('selected-fave-quote', (faveQuote) => {
+    this.faveQuotes.push(faveQuote);
+  })
 },
 components: {
   "quote-box": QuoteBox,
-  "quote-item": QuoteItem
+  "quote-item": QuoteItem,
+  "fave-quote-box": FaveQuoteBox,
+  "fave-quote-detail": FaveQuoteDetail
 }
 }
 </script>

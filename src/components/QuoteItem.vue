@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
-    <p>{{quote.quoteText}}</p>
-    <p>~ {{quote.quoteAuthor}} ~</p>
+    <p>{{this.quote.quoteText}}</p>
+    <p>~ {{this.quote.quoteAuthor}} ~</p>
     <button type="button" v-on:click="handleClickFave">Save as a Fave</button>
   </div>
 
@@ -10,10 +10,10 @@
 <script>
 import {eventBus} from '../main.js';
 export default {
-  name: "quote-detail",
+  name: "quote-item",
   props: ['quote'],
   methods: {
-    handClickFave(){
+    handleClickFave(){
       eventBus.$emit('selected-fave-quote', this.quote);
     }
   }
