@@ -3,6 +3,8 @@
     <h1>Quote or Joke?</h1>
     <quote-box :quoteBox="currentQuote"></quote-box>
     <fave-quote-box :faveQuotes="faveQuotes"></fave-quote-box>
+
+    <joke-box :joke="currentJoke"></joke-box>
   </div>
 </template>
 
@@ -12,6 +14,7 @@ import QuoteBox from './components/QuoteBox.vue';
 import QuoteItem from './components/QuoteItem.vue';
 import FaveQuoteBox from './components/FaveQuoteBox.vue';
 import FaveQuoteDetail from './components/FaveQuoteDetail.vue';
+import JokeBox from './components/JokeBox.vue';
 
 
 export default {
@@ -21,7 +24,8 @@ export default {
       quotes: [],
       jokes:[],
       currentQuote: null,
-      faveQuotes: []
+      faveQuotes: [],
+      currentJoke: null
     };
 },
 mounted(){
@@ -34,17 +38,21 @@ mounted(){
 
   fetch('https://official-joke-api.appspot.com/random_joke')
   .then(res => res.json())
-  .then(joke => this.jokes.push(joke))
-
-  eventBus.$on('selected-fave-quote', (faveQuote) => {
-    this.faveQuotes.push(faveQuote);
+  .then(joke => {
+    this.jokes.push(joke);
+    this.currentJoke = joke;
   })
+
+  eventBus.$on('selected-fave-quote'), (faveQuote) => {
+    this.faveQuotes.push(faveQuote);
+  }
 },
 components: {
   "quote-box": QuoteBox,
   "quote-item": QuoteItem,
   "fave-quote-box": FaveQuoteBox,
-  "fave-quote-detail": FaveQuoteDetail
+  "fave-quote-detail": FaveQuoteDetail,
+  "joke-box": JokeBox
 }
 }
 </script>

@@ -8,7 +8,7 @@
 import QuoteItem from './QuoteItem.vue';
 export default {
   name: "quote-box",
-  props: ["quoteBox"],
+  props: ['quoteBox'],
   components: {
     "quote-item": QuoteItem
   }

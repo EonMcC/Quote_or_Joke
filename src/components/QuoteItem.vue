@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
-    <p>{{this.quote.quoteText}}</p>
-    <p>~ {{this.quote.quoteAuthor}} ~</p>
+    <p>{{quote.quoteText}}</p>
+    <p>~ {{quote.quoteAuthor}} ~</p>
     <button type="button" v-on:click="handleClickFave">Save as a Fave</button>
   </div>
 
