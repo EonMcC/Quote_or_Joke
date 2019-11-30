@@ -1,9 +1,6 @@
 <template lang="html">
   <div>
-    <ul>
-      <fave-joke-detail v-for="(fave, index) in faveJokes" :faveJoke="fave" :key="index"></fave-joke-detail>
-    </ul>
-
+    <fave-joke-detail class="fit-width" v-for="(fave, index) in faveJokes" :faveJoke="fave" :key="index"></fave-joke-detail>
   </div>
 </template>
 
@@ -20,4 +17,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.fit-width {
+  width: 47%;
+  padding: 5px;
+}
 </style>

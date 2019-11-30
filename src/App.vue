@@ -2,9 +2,13 @@
   <div id="app">
     <h1 class="app-header">Quote or Joke?</h1>
     <quote-box id="quote-box" :quoteBox="currentQuote"></quote-box>
-    <fave-quote-box id="fave-quote-box" :faveQuotes="faveQuotes"></fave-quote-box>
+    <transition name="fade">
+      <fave-quote-box v-show="faveQuoteDisplay" id="fave-quote-box" :faveQuotes="faveQuotes"></fave-quote-box>
+    </transition>
     <joke-box id="joke-box" :joke="currentJoke"></joke-box>
-    <fave-joke-box id="fave-joke-box" :faveJokes="faveJokes"></fave-joke-box>
+    <transition name="fade">
+      <fave-joke-box v-show="faveJokeDisplay" id="fave-joke-box" :faveJokes="faveJokes"></fave-joke-box>
+    </transition>
     <combo-box id="combo-box" :comboQuote="comboQuote" :comboJoke="comboJoke"></combo-box>
   </div>
 </template>
@@ -32,7 +36,9 @@ export default {
       currentJoke: null,
       faveJokes: [],
       comboQuote: null,
-      comboJoke: null
+      comboJoke: null,
+      faveQuoteDisplay: false,
+      faveJokeDisplay: false
 
     };
 },
@@ -81,6 +87,12 @@ mounted(){
     .then(res => res.json())
     .then(quote => this.comboQuote = quote.quoteAuthor);
     })
+    eventBus.$on('faveQuoteDisplay', (status) => {
+      this.faveQuoteDisplay = status;
+    })
+    eventBus.$on('faveJokeDisplay', (status) => {
+      this.faveJokeDisplay = status;
+    })
 },
 components: {
   "quote-box": QuoteBox,
@@ -125,6 +137,8 @@ components: {
   grid-row-end: 4;
   grid-column-start: 2;
   grid-column-end: 6;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #joke-box {
@@ -137,8 +151,10 @@ components: {
 #fave-joke-box {
   grid-row-start: 3;
   grid-row-end: 4;
-  grid-column-start: 9;
+  grid-column-start: 8;
   grid-column-end: 12;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #combo-box {
@@ -147,4 +163,12 @@ components: {
   grid-column-start: 4;
   grid-column-end: 10;
 }
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 1s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
 </style>

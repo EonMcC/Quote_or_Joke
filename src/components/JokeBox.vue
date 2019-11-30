@@ -32,6 +32,7 @@ export default {
     },
     mouseOver: function(){
       this.display = !this.display;
+      eventBus.$emit('faveJokeDisplay', this.display);
         }
   }
 }

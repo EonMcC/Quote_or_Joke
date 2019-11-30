@@ -1,8 +1,7 @@
 <template lang="html">
   <div v-if="faveQuote">
-    <h3>{{faveQuote.quoteText}}</h3>
-    <h4>{{faveQuote.quoteAuthor}}</h4>
-
+    <p>{{faveQuote.quoteText}}</p>
+    <p><strong>{{faveQuote.quoteAuthor}}</strong></p>
   </div>
 </template>
 

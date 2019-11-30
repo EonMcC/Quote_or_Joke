@@ -1,7 +1,7 @@
 <template lang="html">
   <div v-if="faveJoke">
-    <h3>{{faveJoke.setup}}</h3>
-    <h4>{{faveJoke.punchline}}</h4>
+    <p>{{faveJoke.setup}}</p>
+    <p><strong>{{faveJoke.punchline}}</strong></p>
 
   </div>
 </template>
