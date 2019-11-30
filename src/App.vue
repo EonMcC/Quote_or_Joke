@@ -1,9 +1,7 @@
 <template>
   <div id="app">
-    <div class="background-joker">
-    </div>
-    <div class="background-buddha">
-    </div>
+    <div class="background-joker"></div>
+    <div class="background-buddha"></div>
     <h1 class="app-header">Quote or Joke?</h1>
     <quote-box id="quote-box" :quoteBox="currentQuote"></quote-box>
     <transition name="fade">
@@ -14,6 +12,7 @@
       <fave-joke-box v-show="faveJokeDisplay" id="fave-joke-box" :faveJokes="faveJokes"></fave-joke-box>
     </transition>
     <combo-box id="combo-box" :comboQuote="comboQuote" :comboJoke="comboJoke"></combo-box>
+    <game-box id="game-box"></game-box>
   </div>
 </template>
 
@@ -28,6 +27,7 @@ import JokeItem from './components/JokeItem.vue';
 import FaveJokeBox from './components/FaveJokeBox.vue';
 import FaveJokeDetail from './components/FaveJokeDetail.vue';
 import ComboBox from './components/ComboBox.vue';
+import GameBox from './components/GameBox.vue';
 
 export default {
   name: 'app',
@@ -106,7 +106,8 @@ components: {
   "joke-box": JokeBox,
   "fave-joke-box": FaveJokeBox,
   "fave-joke-detail": FaveJokeDetail,
-  "combo-box": ComboBox
+  "combo-box": ComboBox,
+  "game-box": GameBox
 }
 }
 </script>
@@ -121,7 +122,7 @@ components: {
   margin-top: 40px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 125px 300px auto 300px;
+  grid-template-rows: 125px 300px auto 300px auto;
 }
 
 .app-header {
@@ -164,6 +165,13 @@ components: {
 #combo-box {
   grid-row-start: 4;
   grid-row-end: 5;
+  grid-column-start: 4;
+  grid-column-end: 10;
+}
+
+#game-box {
+  grid-row-start: 5;
+  grid-row-end: 6;
   grid-column-start: 4;
   grid-column-end: 10;
 }
