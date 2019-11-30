@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <div class="background-joker">
+    </div>
+    <div class="background-buddha">
+    </div>
     <h1 class="app-header">Quote or Joke?</h1>
     <quote-box id="quote-box" :quoteBox="currentQuote"></quote-box>
     <transition name="fade">
@@ -169,6 +173,31 @@ components: {
 }
 .fade-enter, .fade-leave-to {
   opacity: 0;
+}
+
+.background-joker {
+  background-image: url(../public/images/joker.jpg);
+  background-position: center;
+  opacity: 0.1;
+  z-index: -1;
+  overflow: hidden;
+  position: absolute;
+  height: 100vh;
+  width: 300px;
+  right: 0;
+}
+
+.background-buddha {
+  background-image: url('../public/images/buddha.png');
+  background-position: top;
+  opacity: 0.1;
+  z-index: -1;
+  overflow: hidden;
+  position: absolute;
+  height: 100%;
+  width: 200px;
+
+
 }
 
 </style>

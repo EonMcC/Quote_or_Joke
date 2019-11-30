@@ -45,4 +45,9 @@ export default {
   .fade-enter, .fade-leave-to {
     opacity: 0;
   }
+
+  button {
+    margin: 10px;
+  }
+
 </style>
