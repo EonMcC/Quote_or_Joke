@@ -1,7 +1,7 @@
 <template lang="html">
   <div v-if="joke">
     <p>{{this.joke.setup}}</p>
-    <p>{{this.joke.punchline}}</p>
+    <p><strong>{{this.joke.punchline}}</strong></p>
     <button type="button" v-on:click="handleClickFave">Save as a Fave</button>
   </div>
 </template>

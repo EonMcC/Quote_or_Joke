@@ -3,8 +3,12 @@
     <hr>
     <h3>Joke</h3>
     <hr>
-    <joke-item v-show="display" :joke="joke"></joke-item>
-    <button v-show="display" :joke="joke" type="button" v-on:click="handleClickJokeReload">Try Again!</button>
+    <transition name="fade">
+      <div v-show="display">
+        <joke-item :joke="joke"></joke-item>
+        <button :joke="joke" type="button" v-on:click="handleClickJokeReload">Try Again!</button>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -34,4 +38,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 1s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
 </style>

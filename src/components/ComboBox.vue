@@ -3,9 +3,13 @@
     <hr>
     <h3>No they didn't!</h3>
     <hr>
-    <p v-show="display" :joke="joke" v-if="comboJoke">{{comboJoke}}</p>
-    <h3 v-show="display" :joke="joke" v-if="comboQuote">~{{comboQuote}}~</h3>
-    <button v-show="display" :joke="joke" type="button" v-on:click="handleClickCombo">Generate</button>
+    <transition name="fade">
+      <div v-show="display">
+        <p :joke="joke" v-if="comboJoke">{{comboJoke}}</p>
+        <h3 :joke="joke" v-if="comboQuote">~{{comboQuote}}~</h3>
+        <button v-show="display" :joke="joke" type="button" v-on:click="handleClickCombo">Generate</button>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -32,4 +36,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 1s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
 </style>

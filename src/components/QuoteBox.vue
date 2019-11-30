@@ -3,8 +3,12 @@
     <hr>
     <h3>Quote</h3>
     <hr>
-    <quote-item v-show="display" :quote="quoteBox"></quote-item>
-    <button v-show="display" :quote="quoteBox" type="button" v-on:click="handleClickQuoteReload">New Quote Please!</button>
+    <transition name="fade">
+      <div v-show="display">
+        <quote-item :quote="quoteBox"></quote-item>
+        <button :quote="quoteBox" type="button" v-on:click="handleClickQuoteReload">New Quote Please!</button>
+      </div>
+  </transition>
   </div>
 </template>
 
@@ -36,6 +40,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
-div {
-}
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 1s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
 </style>
