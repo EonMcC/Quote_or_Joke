@@ -5,6 +5,7 @@
     <fave-quote-box :faveQuotes="faveQuotes"></fave-quote-box>
     <joke-box :joke="currentJoke"></joke-box>
     <fave-joke-box :faveJokes="faveJokes"></fave-joke-box>
+    <combo-box :comboQuote="comboQuote" :comboJoke="comboJoke"></combo-box>
   </div>
 </template>
 
@@ -18,9 +19,7 @@ import JokeBox from './components/JokeBox.vue';
 import JokeItem from './components/JokeItem.vue';
 import FaveJokeBox from './components/FaveJokeBox.vue';
 import FaveJokeDetail from './components/FaveJokeDetail.vue';
-
-
-
+import ComboBox from './components/ComboBox.vue';
 
 export default {
   name: 'app',
@@ -31,7 +30,10 @@ export default {
       currentQuote: null,
       faveQuotes: [],
       currentJoke: null,
-      faveJokes: []
+      faveJokes: [],
+      comboQuote: null,
+      comboJoke: null
+
     };
 },
 mounted(){
@@ -71,6 +73,14 @@ mounted(){
       this.currentJoke = joke;
     })
   })
+  eventBus.$on('loadCombo', () => {
+    fetch('https://quote-garden.herokuapp.com/quotes/random')
+    .then(res => res.json())
+    .then(quote => this.comboQuote = quote.quoteAuthor);
+    fetch('https://official-joke-api.appspot.com/random_joke')
+    .then(result => result.json())
+    .then(joke => this.comboJoke = joke.punchline);
+    })
 },
 components: {
   "quote-box": QuoteBox,
@@ -79,7 +89,8 @@ components: {
   "fave-quote-detail": FaveQuoteDetail,
   "joke-box": JokeBox,
   "fave-joke-box": FaveJokeBox,
-  "fave-joke-detail": FaveJokeDetail
+  "fave-joke-detail": FaveJokeDetail,
+  "combo-box": ComboBox
 }
 }
 </script>
