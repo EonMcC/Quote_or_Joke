@@ -1,9 +1,10 @@
 <template lang="html">
-  <div>
+  <div @mouseover="mouseOver" @mouseout="mouseOver">
     <hr>
     <h3>Quote</h3>
-    <quote-item :quote="quoteBox"></quote-item>
-    <button type="button" v-on:click="handleClickQuoteReload">New Quote Please!</button>
+    <hr>
+    <quote-item v-show="display" :quote="quoteBox"></quote-item>
+    <button v-show="display" :quote="quoteBox" type="button" v-on:click="handleClickQuoteReload">New Quote Please!</button>
   </div>
 </template>
 
@@ -12,6 +13,11 @@ import {eventBus} from '../main.js'
 import QuoteItem from './QuoteItem.vue';
 export default {
   name: "quote-box",
+  data(){
+    return {
+      display: false
+    };
+  },
   props: ['quoteBox'],
   components: {
     "quote-item": QuoteItem
@@ -19,10 +25,17 @@ export default {
   methods: {
     handleClickQuoteReload(){
       eventBus.$emit('reloadQuote');
+    },
+    mouseOver: function(){
+      this.display = !this.display;
+        }
+
     }
-  }
+
 }
 </script>
 
 <style lang="css" scoped>
+div {
+}
 </style>

@@ -1,9 +1,10 @@
 <template lang="html">
-  <div>
+  <div @mouseover="mouseOver" @mouseout="mouseOver">
     <hr>
     <h3>Joke</h3>
-    <joke-item :joke="joke"></joke-item>
-    <button type="button" v-on:click="handleClickJokeReload">Try Again!</button>
+    <hr>
+    <joke-item v-show="display" :joke="joke"></joke-item>
+    <button v-show="display" :joke="joke" type="button" v-on:click="handleClickJokeReload">Try Again!</button>
   </div>
 </template>
 
@@ -12,6 +13,11 @@ import {eventBus} from '../main.js'
 import JokeItem from './JokeItem.vue';
 export default {
   name: "joke-box",
+  data(){
+    return {
+      display: false
+    };
+  },
   props: ['joke'],
   components: {
     "joke-item": JokeItem
@@ -19,7 +25,10 @@ export default {
   methods: {
     handleClickJokeReload(){
       eventBus.$emit('reloadJoke');
-    }
+    },
+    mouseOver: function(){
+      this.display = !this.display;
+        }
   }
 }
 </script>
