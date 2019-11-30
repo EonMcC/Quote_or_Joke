@@ -1,5 +1,7 @@
 <template lang="html">
   <div>
+    <hr>
+    <h3>Joke</h3>
     <joke-item :joke="joke"></joke-item>
     <button type="button" v-on:click="handleClickJokeReload">Try Again!</button>
   </div>

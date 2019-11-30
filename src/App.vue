@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <h1>Quote or Joke?</h1>
-    <quote-box :quoteBox="currentQuote"></quote-box>
-    <fave-quote-box :faveQuotes="faveQuotes"></fave-quote-box>
-    <joke-box :joke="currentJoke"></joke-box>
-    <fave-joke-box :faveJokes="faveJokes"></fave-joke-box>
-    <combo-box :comboQuote="comboQuote" :comboJoke="comboJoke"></combo-box>
+    <h1 class="app-header">Quote or Joke?</h1>
+    <quote-box id="quote-box" :quoteBox="currentQuote"></quote-box>
+    <fave-quote-box id="fave-quote-box" :faveQuotes="faveQuotes"></fave-quote-box>
+    <joke-box id="joke-box" :joke="currentJoke"></joke-box>
+    <fave-joke-box id="fave-joke-box" :faveJokes="faveJokes"></fave-joke-box>
+    <combo-box id="combo-box" :comboQuote="comboQuote" :comboJoke="comboJoke"></combo-box>
   </div>
 </template>
 
@@ -74,12 +74,12 @@ mounted(){
     })
   })
   eventBus.$on('loadCombo', () => {
-    fetch('https://quote-garden.herokuapp.com/quotes/random')
-    .then(res => res.json())
-    .then(quote => this.comboQuote = quote.quoteAuthor);
     fetch('https://official-joke-api.appspot.com/random_joke')
     .then(result => result.json())
     .then(joke => this.comboJoke = joke.punchline);
+    fetch('https://quote-garden.herokuapp.com/quotes/random')
+    .then(res => res.json())
+    .then(quote => this.comboQuote = quote.quoteAuthor);
     })
 },
 components: {
@@ -102,6 +102,49 @@ components: {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 125px 300px auto 300px;
+}
+
+.app-header {
+  grid-column-start: 5;
+  grid-column-end: 9;
+}
+
+#quote-box {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 2;
+  grid-column-end: 6;
+}
+
+#fave-quote-box {
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 2;
+  grid-column-end: 6;
+}
+
+#joke-box {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 8;
+  grid-column-end: 12;
+}
+
+#fave-joke-box {
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 9;
+  grid-column-end: 12;
+}
+
+#combo-box {
+  grid-row-start: 4;
+  grid-row-end: 5;
+  grid-column-start: 4;
+  grid-column-end: 10;
 }
 </style>

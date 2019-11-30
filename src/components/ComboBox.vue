@@ -1,6 +1,7 @@
 <template lang="html">
   <div>
-    <h1>No they didn't!</h1>
+    <hr>
+    <h2>No they didn't!</h2>
     <button type="button" v-on:click="handleClickCombo">Generate</button>
     <p v-if="comboJoke">{{comboJoke}}</p>
     <h3 v-if="comboQuote">~{{comboQuote}}~</h3>
