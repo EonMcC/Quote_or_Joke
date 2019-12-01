@@ -8,8 +8,8 @@
         <button type="button" v-on:click="generate">Generate/Reset Game</button>
         <h4>Who said the following quote?</h4>
         <h3 v-if="realQuote">{{this.realQuote.quoteText}}</h3>
-        <h1 v-if="lose">Wrong</h1>
-        <h1 v-if="win">Correct!</h1>
+        <h1 class="wrong" v-if="lose">Wrong</h1>
+        <h1 class="correct" v-if="win">Correct!</h1>
         <div class="answer-container">
           <p v-for="quote in threeQuotes" v-on:click="winLose(quote)">
             {{quote.quoteAuthor}}
@@ -99,6 +99,23 @@ export default {
     border: solid 1px black;
     padding: 5px;
     cursor: pointer;
+  }
+
+  p:hover {
+    margin-left: 10px;
+    margin-right: 10px;
+    border: solid 1px black;
+    padding: 5px;
+    cursor: pointer;
+    background-color: #76ae76;
+  }
+
+  .correct {
+    color: #76ae76;
+  }
+
+  .wrong {
+    color: #6C0E23;
   }
 
   .fade-enter-active, .fade-leave-active {
