@@ -50,6 +50,7 @@ export default {
     },
     generate: function (){
       var i;
+      this.threeQuotes = [];
       for (i = 0; i < 3; i++) {
         this.threeQuotes.push(this.allQuotes[this.randomIndex(this.allQuotes)]);
       }
