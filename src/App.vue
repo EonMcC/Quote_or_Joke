@@ -23,7 +23,6 @@ import QuoteItem from './components/QuoteItem.vue';
 import FaveQuoteBox from './components/FaveQuoteBox.vue';
 import FaveQuoteDetail from './components/FaveQuoteDetail.vue';
 import JokeBox from './components/JokeBox.vue';
-import JokeItem from './components/JokeItem.vue';
 import FaveJokeBox from './components/FaveJokeBox.vue';
 import FaveJokeDetail from './components/FaveJokeDetail.vue';
 import ComboBox from './components/ComboBox.vue';
@@ -122,7 +121,7 @@ components: {
   margin-top: 40px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 125px 300px auto 300px 400px;
+  grid-template-rows: auto minmax(300px, auto) auto 300px 400px;
 }
 
 .app-header {

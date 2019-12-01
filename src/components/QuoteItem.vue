@@ -1,6 +1,6 @@
 <template lang="html">
   <div v-if="quote">
-    <p>{{quote.quoteText}}</p>
+    <p>"{{quote.quoteText}}"</p>
     <p><strong>~ {{quote.quoteAuthor}} ~</strong></p>
     <button type="button" v-on:click="handleClickFave">Save as a Fave</button>
   </div>

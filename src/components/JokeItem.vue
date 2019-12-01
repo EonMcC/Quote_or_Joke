@@ -34,8 +34,4 @@ export default {
     font-size: 0.5em;
   }
 
-  .reveal {
-
-  }
-
 </style>

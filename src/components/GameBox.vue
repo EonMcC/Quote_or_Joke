@@ -6,17 +6,14 @@
     <transition name="fade">
       <div v-show="display">
         <button type="button" v-on:click="generate">Generate/Reset Game</button>
-        <h4>Who said the following quote?</h4>
-        <h3 v-if="realQuote">{{this.realQuote.quoteText}}</h3>
+        <h5>Who said the following quote?</h5>
+        <h3 v-if="realQuote">"{{this.realQuote.quoteText}}"</h3>
         <h1 class="wrong" v-if="winOrLose === 0">Wrong</h1>
         <h1 class="correct" v-if="winOrLose === 1">Correct!</h1>
         <div class="answer-container">
           <p v-for="quote in threeQuotes" v-on:click="winLose(quote)">
             {{quote.quoteAuthor}}
           </p>
-          <!-- <p style="order:" v-if="realQuote" v-on:click="youWin">{{this.realQuote[0].quoteAuthor}}</p> -->
-          <!-- <p :style="`order:{{randomIndex(allQuotes)}};`" v-if="fakeQuote1" v-on:click="youLose">{{this.fakeQuote1[0].quoteAuthor}}</p>
-          <p :style="`order:{{randomIndex(allQuotes)}};`" v-if="fakeQuote2" v-on:click="youLose">{{this.fakeQuote2[0].quoteAuthor}}</p> -->
       </div>
     </div>
   </transition>
@@ -62,7 +59,6 @@ export default {
         this.winOrLose = 1;
       } else {
         this.winOrLose = 0;
-
       }
     },
 
