@@ -8,8 +8,8 @@
         <button type="button" v-on:click="generate">Generate/Reset Game</button>
         <h4>Who said the following quote?</h4>
         <h3 v-if="realQuote">{{this.realQuote.quoteText}}</h3>
-        <h1 class="wrong" v-if="lose">Wrong</h1>
-        <h1 class="correct" v-if="win">Correct!</h1>
+        <h1 class="wrong" v-if="winOrLose === 0">Wrong</h1>
+        <h1 class="correct" v-if="winOrLose === 1">Correct!</h1>
         <div class="answer-container">
           <p v-for="quote in threeQuotes" v-on:click="winLose(quote)">
             {{quote.quoteAuthor}}
@@ -33,8 +33,7 @@ export default {
       realQuote: null,
       fakeQuote1: null,
       fakeQuote2: null,
-      win: false,
-      lose: false,
+      winOrLose: 2,
       display: false
     };
   },
@@ -55,29 +54,23 @@ export default {
         this.threeQuotes.push(this.allQuotes[this.randomIndex(this.allQuotes)]);
       }
       this.realQuote = this.threeQuotes[this.randomIndex(this.threeQuotes)];
-      // this.realQuote = this.threeQuotes.splice(this.allQuotes[this.randomIndex(this.allQuotes)], 1);
 
-      // this.fakeQuote1 = this.threeQuotes.splice(this.allQuotes[this.randomIndex(this.allQuotes)], 1);
-      //
-      // this.fakeQuote2 = this.threeQuotes.splice(this.allQuotes[this.randomIndex(this.allQuotes)], 1);
-
-      this.lose = false;
-      this.win = false;
+      this.winOrLose = 2;
     },
     winLose(e){
       if (e === this.realQuote) {
-        this.win = true;
+        this.winOrLose = 1;
       } else {
-        this.lose = true;
+        this.winOrLose = 0;
 
       }
     },
 
     youLose(){
-      this.lose = true;
+      this.winOrLose = 0;
     },
     youWin(){
-      this.win = true;
+      this.winOrLose = 1;
     },
     mouseOver: function(){
     this.display = !this.display;
