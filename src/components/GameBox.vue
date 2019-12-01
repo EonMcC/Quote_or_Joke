@@ -3,14 +3,15 @@
     <hr>
     <h3>Roll Up, Roll Up</h3>
     <hr>
+    <button type="button" v-on:click="generate">Generate/Reset Game</button>
     <h4>Who said the following quote?</h4>
-    <p v-if="threeQuotes.length !== 0">Test: {{this.threeQuotes[1].quoteText}}</p>
-    <button type="button" v-on:click="generate">Generate Game</button>
-    <h3 v-if="realQuote">{{this.realQuote[0].quoteAuthor}}</h3>
+    <h3 v-if="realQuote">{{this.realQuote[0].quoteText}}</h3>
+    <h1 v-if="lose">Wrong</h1>
+    <h1 v-if="win">Correct!</h1>
     <div class="answer-container">
-      <p v-if="realQuote">{{this.realQuote[0].quoteAuthor}}</p>
-      <p v-if="fakeQuote1">{{this.fakeQuote1[0].quoteAuthor}}</p>
-      <p v-if="fakeQuote2">{{this.fakeQuote2[0].quoteAuthor}}</p>
+      <p v-if="realQuote" v-on:click="youWin">{{this.realQuote[0].quoteAuthor}}</p>
+      <p v-if="fakeQuote1" v-if:click="youLose">{{this.fakeQuote1[0].quoteAuthor}}</p>
+      <p v-if="fakeQuote2" v-on:click="youLose">{{this.fakeQuote2[0].quoteAuthor}}</p>
     </div>
   </div>
 </template>
@@ -25,7 +26,9 @@ export default {
       realQuoteMatch: null,
       realQuote: null,
       fakeQuote1: null,
-      fakeQuote2: null
+      fakeQuote2: null,
+      win: false,
+      lose: false
     };
   },
   mounted() {
@@ -48,6 +51,16 @@ export default {
       this.fakeQuote1 = this.threeQuotes.splice(this.allQuotes[this.randomIndex(this.allQuotes)], 1);
 
       this.fakeQuote2 = this.threeQuotes.splice(this.allQuotes[this.randomIndex(this.allQuotes)], 1);
+
+      this.lose = false;
+      this.win = false;
+    },
+
+    youLose(){
+      this.lose = true;
+    },
+    youWin(){
+      this.win = true;
     }
   }
 }
@@ -65,6 +78,7 @@ export default {
     margin-right: 10px;
     border: solid 1px black;
     padding: 5px;
+    cursor: pointer;
   }
 
 </style>
