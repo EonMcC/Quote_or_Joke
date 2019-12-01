@@ -122,7 +122,7 @@ components: {
   margin-top: 40px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 125px 300px auto 300px auto;
+  grid-template-rows: 125px 300px auto 300px 400px;
 }
 
 .app-header {

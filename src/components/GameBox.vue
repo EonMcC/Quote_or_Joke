@@ -1,18 +1,22 @@
 <template lang="html">
-  <div>
+  <div @mouseover="mouseOver" @mouseout="mouseOver">
     <hr>
     <h3>Roll Up, Roll Up</h3>
     <hr>
-    <button type="button" v-on:click="generate">Generate/Reset Game</button>
-    <h4>Who said the following quote?</h4>
-    <h3 v-if="realQuote">{{this.realQuote[0].quoteText}}</h3>
-    <h1 v-if="lose">Wrong</h1>
-    <h1 v-if="win">Correct!</h1>
-    <div class="answer-container">
-      <p v-if="realQuote" v-on:click="youWin">{{this.realQuote[0].quoteAuthor}}</p>
-      <p v-if="fakeQuote1" v-if:click="youLose">{{this.fakeQuote1[0].quoteAuthor}}</p>
-      <p v-if="fakeQuote2" v-on:click="youLose">{{this.fakeQuote2[0].quoteAuthor}}</p>
+    <transition name="fade">
+      <div v-show="display">
+        <button type="button" v-on:click="generate">Generate/Reset Game</button>
+        <h4>Who said the following quote?</h4>
+        <h3 v-if="realQuote">{{this.realQuote[0].quoteText}}</h3>
+        <h1 v-if="lose">Wrong</h1>
+        <h1 v-if="win">Correct!</h1>
+        <div class="answer-container">
+          <p v-if="realQuote" v-on:click="youWin">{{this.realQuote[0].quoteAuthor}}</p>
+          <p v-if="fakeQuote1" v-if:click="youLose">{{this.fakeQuote1[0].quoteAuthor}}</p>
+          <p v-if="fakeQuote2" v-on:click="youLose">{{this.fakeQuote2[0].quoteAuthor}}</p>
+        </div>
     </div>
+  </transition>
   </div>
 </template>
 
@@ -28,7 +32,8 @@ export default {
       fakeQuote1: null,
       fakeQuote2: null,
       win: false,
-      lose: false
+      lose: false,
+      display: false
     };
   },
   mounted() {
@@ -61,7 +66,10 @@ export default {
     },
     youWin(){
       this.win = true;
-    }
+    },
+    mouseOver: function(){
+    this.display = !this.display;
+      }
   }
 }
 </script>
@@ -79,6 +87,13 @@ export default {
     border: solid 1px black;
     padding: 5px;
     cursor: pointer;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 1s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
   }
 
 </style>
