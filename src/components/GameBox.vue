@@ -7,14 +7,17 @@
       <div v-show="display">
         <button type="button" v-on:click="generate">Generate/Reset Game</button>
         <h4>Who said the following quote?</h4>
-        <h3 v-if="realQuote">{{this.realQuote[0].quoteText}}</h3>
+        <h3 v-if="realQuote">{{this.realQuote.quoteText}}</h3>
         <h1 v-if="lose">Wrong</h1>
         <h1 v-if="win">Correct!</h1>
         <div class="answer-container">
-          <p v-if="realQuote" v-on:click="youWin">{{this.realQuote[0].quoteAuthor}}</p>
-          <p v-if="fakeQuote1" v-if:click="youLose">{{this.fakeQuote1[0].quoteAuthor}}</p>
-          <p v-if="fakeQuote2" v-on:click="youLose">{{this.fakeQuote2[0].quoteAuthor}}</p>
-        </div>
+          <p v-for="quote in threeQuotes" v-on:click="winLose(quote)">
+            {{quote.quoteAuthor}}
+          </p>
+          <!-- <p style="order:" v-if="realQuote" v-on:click="youWin">{{this.realQuote[0].quoteAuthor}}</p> -->
+          <!-- <p :style="`order:{{randomIndex(allQuotes)}};`" v-if="fakeQuote1" v-on:click="youLose">{{this.fakeQuote1[0].quoteAuthor}}</p>
+          <p :style="`order:{{randomIndex(allQuotes)}};`" v-if="fakeQuote2" v-on:click="youLose">{{this.fakeQuote2[0].quoteAuthor}}</p> -->
+      </div>
     </div>
   </transition>
   </div>
@@ -27,7 +30,6 @@ export default {
     return{
       allQuotes: [],
       threeQuotes: [],
-      realQuoteMatch: null,
       realQuote: null,
       fakeQuote1: null,
       fakeQuote2: null,
@@ -51,14 +53,23 @@ export default {
       for (i = 0; i < 3; i++) {
         this.threeQuotes.push(this.allQuotes[this.randomIndex(this.allQuotes)]);
       }
-      this.realQuote = this.threeQuotes.splice(this.allQuotes[this.randomIndex(this.allQuotes)], 1);
+      this.realQuote = this.threeQuotes[this.randomIndex(this.threeQuotes)];
+      // this.realQuote = this.threeQuotes.splice(this.allQuotes[this.randomIndex(this.allQuotes)], 1);
 
-      this.fakeQuote1 = this.threeQuotes.splice(this.allQuotes[this.randomIndex(this.allQuotes)], 1);
-
-      this.fakeQuote2 = this.threeQuotes.splice(this.allQuotes[this.randomIndex(this.allQuotes)], 1);
+      // this.fakeQuote1 = this.threeQuotes.splice(this.allQuotes[this.randomIndex(this.allQuotes)], 1);
+      //
+      // this.fakeQuote2 = this.threeQuotes.splice(this.allQuotes[this.randomIndex(this.allQuotes)], 1);
 
       this.lose = false;
       this.win = false;
+    },
+    winLose(e){
+      if (e === this.realQuote) {
+        this.win = true;
+      } else {
+        this.lose = true;
+
+      }
     },
 
     youLose(){

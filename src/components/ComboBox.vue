@@ -5,9 +5,9 @@
     <hr>
     <transition name="fade">
       <div v-show="display">
-        <p :joke="joke" v-if="comboJoke">{{comboJoke}}</p>
-        <h3 :joke="joke" v-if="comboQuote">~{{comboQuote}}~</h3>
-        <button v-show="display" :joke="joke" type="button" v-on:click="handleClickCombo">Generate</button>
+        <p v-if="comboJoke">{{comboJoke}}</p>
+        <h3 v-if="comboQuote">~{{comboQuote}}~</h3>
+        <button v-show="display" type="button" v-on:click="handleClickCombo">Generate</button>
       </div>
     </transition>
   </div>
