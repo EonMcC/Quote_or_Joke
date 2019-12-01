@@ -4,14 +4,14 @@
     <h3>Roll Up, Roll Up</h3>
     <hr>
     <h4>Who said the following quote?</h4>
-    <p v-if="threeQuotes.length !== 0">{{this.threeQuotes[1].quoteText}}</p>
-    <button type="button" v-on:click="generate"></button>
-    <!-- <h6 v-if="realQuote">{{this.realQuote.quoteText}}</h6> -->
-    <!-- <div class="answer-container">
-      <p v-if="realQuote">{{this.realQuote.quoteAuthor}}</p>
-      <p v-if="fakeQuote1">{{this.fakeQuote1.quoteAuthor}}</p>
-      <p v-if="fakeQuote2">{{this.fakeQuote2.quoteAuthor}}</p>
-    </div> -->
+    <p v-if="threeQuotes.length !== 0">Test: {{this.threeQuotes[1].quoteText}}</p>
+    <button type="button" v-on:click="generate">Generate Game</button>
+    <h3 v-if="realQuote">{{this.realQuote[0].quoteAuthor}}</h3>
+    <div class="answer-container">
+      <p v-if="realQuote">{{this.realQuote[0].quoteAuthor}}</p>
+      <p v-if="fakeQuote1">{{this.fakeQuote1[0].quoteAuthor}}</p>
+      <p v-if="fakeQuote2">{{this.fakeQuote2[0].quoteAuthor}}</p>
+    </div>
   </div>
 </template>
 
@@ -39,12 +39,16 @@ export default {
       return randomIndex;
     },
     generate: function (){
-      // this.threeQuotes = this.allQuotes[1].quoteText;
-    var i;
-    for (i = 0; i < 3; i++) {
-      this.threeQuotes.push(this.allQuotes[this.randomIndex(this.allQuotes)]);
+      var i;
+      for (i = 0; i < 3; i++) {
+        this.threeQuotes.push(this.allQuotes[this.randomIndex(this.allQuotes)]);
+      }
+      this.realQuote = this.threeQuotes.splice(this.allQuotes[this.randomIndex(this.allQuotes)], 1);
+
+      this.fakeQuote1 = this.threeQuotes.splice(this.allQuotes[this.randomIndex(this.allQuotes)], 1);
+
+      this.fakeQuote2 = this.threeQuotes.splice(this.allQuotes[this.randomIndex(this.allQuotes)], 1);
     }
-  }
   }
 }
 </script>
@@ -59,7 +63,7 @@ export default {
   p {
     margin-left: 10px;
     margin-right: 10px;
-    border: solid 2px black;
+    border: solid 1px black;
     padding: 5px;
   }
 
