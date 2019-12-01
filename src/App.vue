@@ -42,7 +42,6 @@ export default {
       comboJoke: null,
       faveQuoteDisplay: false,
       faveJokeDisplay: false
-
     };
 },
 mounted(){
