@@ -1,4 +1,4 @@
-# quote_or_joke
+# Quote or Joke
 
 Quote or Joke is a small program I wrote to fulfill a CodeClan weekend homework brief.
 
