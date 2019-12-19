@@ -1,6 +1,6 @@
 # Quote or Joke
 
-Quote or Joke is a small program I wrote to fulfill a CodeClan weekend homework brief.
+Quote or Joke is a small program I wrote to fulfill the week 7 CodeClan weekend homework brief.
 
 It pulls from two seperate APIs to produce either a joke or a quote.
 
